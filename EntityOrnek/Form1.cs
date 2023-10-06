@@ -98,6 +98,101 @@ namespace EntityOrnek
 
         private void BtnBul_Click(object sender, EventArgs e)
         {
+            dataGridView1.DataSource = db.TBLOGRENCI.Where(x => x.AD == TxtAd.Text | x.SOYAD == TxtSoyad.Text).ToList() ;
+        }
+
+        private void TxtAd_TextChanged(object sender, EventArgs e)
+        {
+            string aranan = TxtAd.Text;
+            var degerler = from item in db.TBLOGRENCI
+                           where item.AD.Contains(aranan)
+                           select item;
+            dataGridView1.DataSource = degerler.ToList();
+
+          
+        }
+
+        private void linq_Click(object sender, EventArgs e)
+        {
+            if(radioButton1.Checked == true)
+            {
+                List<TBLOGRENCI> liste1 = db.TBLOGRENCI.OrderBy(p => p.AD).ToList();
+                dataGridView1.DataSource = liste1;
+            }
+            // descending olarak sıralamak için
+            else if (radioButton2.Checked == true)
+            {
+                List<TBLOGRENCI> liste2 = db.TBLOGRENCI.OrderByDescending(p => p.AD).ToList();
+                dataGridView1.DataSource = liste2;
+            }
+            //sadece ilk 3 kaydı almak için
+            else if (radioButton3.Checked == true)
+            {
+                List<TBLOGRENCI> liste3 = db.TBLOGRENCI.OrderBy(p => p.AD).Take(3).ToList();
+                dataGridView1.DataSource = liste3;
+            }
+            // ID'ye göre getirmek için
+            else if (radioButton4.Checked == true)
+            {
+                int id = Convert.ToInt32(TxtÖğrenciID.Text);
+                List<TBLOGRENCI> liste4 = db.TBLOGRENCI.Where(p=> p.ID == id).ToList();
+                dataGridView1.DataSource = liste4;
+            }
+            // Ad'ı a ile başlayanlar
+            else if (radioButton5.Checked == true)
+            {
+                List<TBLOGRENCI> liste5 = db.TBLOGRENCI.Where(p => p.AD.StartsWith("a")).ToList();
+                dataGridView1.DataSource = liste5;
+            }
+            // Ad'ı a ile bitenler
+            else if (radioButton6.Checked == true)
+            {
+                List<TBLOGRENCI> liste6 = db.TBLOGRENCI.Where(p => p.AD.EndsWith("a")).ToList();
+                dataGridView1.DataSource = liste6;
+            }
+            // tabloda değer var mı
+            else if (radioButton7.Checked == true)
+            {
+                bool deger = db.TBLOGRENCI.Any();
+                MessageBox.Show(deger.ToString(), "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            // toplam değeri ver
+            else if (radioButton8.Checked == true)
+            {
+                int toplam = db.TBLOGRENCI.Count();
+                MessageBox.Show(toplam.ToString(), "Toplam Öğrenci Sayısı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            else if (radioButton9.Checked == true)
+            {
+                int toplam = db.TBLOGRENCI.Count();
+                MessageBox.Show(toplam.ToString(), "Toplam Öğrenci Sayısı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            else if (radioButton10.Checked == true)
+            {
+                int toplam = db.TBLOGRENCI.Count();
+                MessageBox.Show(toplam.ToString(), "Toplam Öğrenci Sayısı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            else if (radioButton11.Checked == true)
+            {
+                int toplam = db.TBLOGRENCI.Count();
+                MessageBox.Show(toplam.ToString(), "Toplam Öğrenci Sayısı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            else if (radioButton12.Checked == true)
+            {
+                int toplam = db.TBLOGRENCI.Count();
+                MessageBox.Show(toplam.ToString(), "Toplam Öğrenci Sayısı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+
+
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
 
         }
     }
